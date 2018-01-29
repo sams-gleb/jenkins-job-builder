@@ -1416,6 +1416,8 @@ class PipelineSCM(jenkins_jobs.modules.base.Base):
                 XML.SubElement(definition_parent, 'scriptPath'
                                ).text = pipeline_dict.get('script-path',
                                                           'Jenkinsfile')
+                XML.SubElement(definition_parent, 'lightweight'
+                               ).text = "true"
             else:
                 raise JenkinsJobsException('Only one SCM can be specified '
                                            'as pipeline-scm')
