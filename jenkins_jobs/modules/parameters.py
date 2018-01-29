@@ -436,6 +436,8 @@ def extended_choice_param(registry, xml_parent, data):
         ('default-property-key', 'defaultPropertyKey', ''),
         ('description-property-file', 'descriptionPropertyFile', ''),
         ('description-property-key', 'descriptionPropertyKey', ''),
+        ('groovyScriptFile', 'groovyScriptFile', ''),
+        ('bindings', 'bindings', ''),
     ]
     convert_mapping_to_xml(pdef, data, mapping, fail_required=True)
 
