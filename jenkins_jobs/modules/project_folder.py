@@ -52,6 +52,8 @@ class Folder(jenkins_jobs.modules.base.Base):
         attributes = {"class": "hudson.views.DefaultViewsTabBar"}
         XML.SubElement(xml_parent, 'viewsTabBar', attrib=attributes)
         XML.SubElement(xml_parent, 'primaryView').text = 'All'
-        XML.SubElement(xml_parent, 'healthMetrics')
+        fdef = XML.SubElement(xml_parent, 'healthMetrics')
+        hdef = XML.SubElement(fdef, 'com.cloudbees.hudson.plugins.folder.health.WorstChildHealthMetric')
+        XML.SubElement(hdef, 'nonRecursive').text = "false"
 
         return xml_parent
