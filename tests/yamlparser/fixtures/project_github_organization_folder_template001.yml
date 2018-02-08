@@ -1,0 +1,36 @@
+- github_organization_job_defaults: &github_organization_job_defaults
+    name: 'workflow_job_defaults'
+    project-type: github-organization-folder
+    disabled: false
+    logrotate:
+        numToKeep: 10
+        artifactDaysToKeep: -1
+        artifactNumToKeep: -1
+
+- job-template:
+    name: '{name}-demo-github-org'
+    description: 'Github Organization demo'
+    <<: *github_organization_job_defaults
+    github-organization-folder:
+        timer-trigger: "@midnight"
+        periodic-folder-interval: 'H H * * *'
+        periodic-folder-spec: '86400000'
+        prune-dead-branches: True
+        number-to-keep: '1'
+        days-to-keep: '1'
+
+        repo-owner: 'OWNER'
+        repo-credentialsid: 'github-access'
+        regex-scm-filter: '*repo*'
+        traits:
+          branch-discovery-strategy: "1"
+          pr-discovery-strategy: "1"
+          fork-pr-discovery-strategy: "1"
+          includes: "PR* master"
+          excludes: ""
+        jenkinsfile-path: "Jenkinsfile"
+
+- project:
+    name: github-org
+    jobs:
+        - '{name}-demo-github-org'
